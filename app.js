@@ -1,6 +1,7 @@
-const formulario= document.querySelector(".form-create");
-let contador=0;
-formulario.addEventListener("submit", (e)=>{
+const formulario = document.querySelector(".form-create");
+let contador = 0;
+
+formulario.addEventListener("submit", (e) => {
     e.preventDefault();
     contador++;
     const descripcion = document.querySelector("#descripcion").value;
@@ -8,25 +9,23 @@ formulario.addEventListener("submit", (e)=>{
     contenedor.innerHTML += `<div class="publicacion">
                 <p>id: ${contador}</p>
                 <p contenteditable="true">${descripcion}</p>
-                <button id="editar" onclick="editar(this)">Editar</button>
-                <button id="eliminar" onclick= "eliminar(this)">eliminar</button>
+                <button class="editar" onclick="editar(this)">Editar</button>
+                <button class="eliminar" onclick="eliminar(this)">Eliminar</button>
             </div>`;
-            cont++;
 });
 
-
-function editar (e){
+function editar(e) {
     const parrafo = e.parentElement.querySelector("p:nth-child(2)");
-    parrafo.contentEditable = true;
-    e.value ="guardar";
-    if(parrafo.contentEditable){
+    if (e.textContent == "Editar") {
+        parrafo.contentEditable = true;
+        e.textContent = "Guardar";
+        parrafo.focus();
+    } else {
+        e.textContent = "Editar";
         parrafo.contentEditable = false;
-    }
-    if (e.value == "guardar"){
-        e.value = "editar";
     }
 }
 
-function eliminar (e){
-e.parentElement.remove();
+function eliminar(e) {
+    e.parentElement.remove();
 }
